@@ -1,5 +1,5 @@
 //controllers
-const quizModel = require('./tourModel');
+const quizModel = require('./../models/questionModel');
 
 exports.checkNamePrice = (req, res, next) => {
 	if (!req.name || !req.price) {

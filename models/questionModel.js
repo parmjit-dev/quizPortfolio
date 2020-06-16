@@ -1,58 +1,38 @@
+//@TODO: 
+/**
+ * have the qestion be inserted to the user's decided quiz database
+ * allow the user to create there own "database - quiz topic" and fill it up with these questions
+ */
 const mongoose = require('mongoose');
-
-const tourSchema = new mongoose.Schema({
-	name: {
+const quizSchema = new mongoose.Schema({
+	question: {
 		type: String,
-		required: [ true, 'A tour must have a name' ],
+		required: [ true, 'A question must have a question to ask' ],
 		unique: true,
 		trim: true
 	},
-	description: {
+	answerSelectionOne: {
 		type: String,
-		trim: true
+		required: [ true, 'A question must have at least 2 or more answers to choose from' ],
 	},
-	duration: {
-		type: Number,
-		required: [ true, 'A tour must have a duration' ]
-	},
-	maxGroupSize: {
-		type: Number,
-		required: [ true, 'A tour must have a maxGroupSize' ]
-	},
-	difficulty: {
+	answerSelectionTwo: {
 		type: String,
-		required: [ true, 'A tour must have a difficulty' ]
+		required: [ true, 'A question must have at least 2 or more answers to choose from' ],
 	},
-	ratingAverage: {
-		type: Number,
-		default: 4.5
-	},
-	ratingQuantity: {
-		type: Number,
-		default: 0
-	},
-	price: {
-		type: Number,
-		required: [ true, 'A tour must have a price' ]
-	},
-	priceDiscount: Number,
-	summary: {
+	answerSelectionThree: {
 		type: String,
-		trim: true
 	},
-	imageCover: {
+	answerSelectionFour: {
 		type: String,
-		required: [ true, 'A tour must have a cover image' ]
+	},
+	image: {
+		type: String,
 	},
 	images: [ String ],
-	created: {
-		type: Date,
-		default: Date.now()
-	},
 	startDates: [ Date ]
 });
 
-const Tour = mongoose.model('Tour', tourSchema);
+const quizLayout = mongoose.model('Quiz', quizSchema);
 /*
 const testTour = new Tour({
 	name: 'The Forest',
@@ -62,4 +42,4 @@ const testTour = new Tour({
 
 testTour.save().then((doc) => console.log(doc)).catch((error) => console.log(error));
 */
-module.exports = Tour;
+module.exports = quizLayout;

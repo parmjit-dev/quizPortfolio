@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const quizRouter = require('./quizRoutes');
+const quizRouter = require('./routes/quizRoutes');
 
 const app = express(); //you don't need to manully define the content type in express
 
