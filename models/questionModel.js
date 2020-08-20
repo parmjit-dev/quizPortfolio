@@ -4,7 +4,8 @@
  * allow the user to create there own "database - quiz topic" and fill it up with these questions
  */
 const mongoose = require('mongoose');
-const quizSchema = new mongoose.Schema({
+
+const questionSchema = new mongoose.Schema({
 	question: {
 		type: String,
 		required: [ true, 'A question must have a question to ask' ],
@@ -25,14 +26,21 @@ const quizSchema = new mongoose.Schema({
 	answerSelectionFour: {
 		type: String,
 	},
-	image: {
-		type: String,
+	correctAnswer: {
+		type: Number,
+		min: 1,
+		max: 4,
+		required: [ true, 'A question must have a correct answer' ]
 	},
-	images: [ String ],
-	startDates: [ Date ]
+	image: String,
+},
+	{
+		// makes sure virtual properties are shown in outputs
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true },
 });
 
-const quizLayout = mongoose.model('Quiz', quizSchema);
+const questionLayout = mongoose.model('Question', questionSchema);
 /*
 const testTour = new Tour({
 	name: 'The Forest',
@@ -42,4 +50,4 @@ const testTour = new Tour({
 
 testTour.save().then((doc) => console.log(doc)).catch((error) => console.log(error));
 */
-module.exports = quizLayout;
+module.exports = questionLayout;

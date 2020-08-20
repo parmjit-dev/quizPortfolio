@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet">
+    <title>Quiz Maker</title>
+</head>
+<body>
+    <div class="wrapper clearfix">
+        <div> Quiz Maker </div>
+        
+        <form class="question_template" action="submit.js" method="POST">
+            <input class="question" id="question_0" value="Enter Question"> 
+            <input class="answer" id="answer_0" value="Answer A"> 
+            <input class="answer" id="answer_1" value="Answer B"> 
+            <input class="answer" id="answer_2" value="Answer C"> 
+            <input class="answer" id="answer_3" value="Answer D"> 
+            <button type="submit" class="add_question" formaction="add_Question.js"> add question </button>
+            <button type="submit" class="review"> Submit/Review Quiz </button>
+        </form>
+        </div>
+</body>
+</html>
