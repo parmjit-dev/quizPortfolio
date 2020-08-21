@@ -13,5 +13,4 @@ class AppError extends Error {
     Error.captureStackTrace(this, this.constructor); // calls back where the origin of the error is
   }
 }
-
 module.exports = AppError;

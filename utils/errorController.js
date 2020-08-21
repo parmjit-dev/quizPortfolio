@@ -22,7 +22,7 @@ const sendErrorProd = (err, res) => { // reduces the amount of error messages th
     });
     // programming or unknown error
   } else {
-    console.error('ERROR 🍆🍆', err);
+    console.error('ERROR', err);
     res.status(500).json({
       status: 'error',
       messgae: 'Something went very wrong!',
@@ -55,25 +55,17 @@ const handleExpiredError = () => new AppError('You token has expired, please log
 
 module.exports = (err, req, res, next) => {
   let error = err; // best practise to not modify the parameter raw
-  console.log(err.logstack); // might not need to change the bottom error
   error.statusCode = err.statusCode || 500; // if defined or eternal server error
   error.status = err.status || 'error'; // error is it is an eternal error
   // distinguishing between dev and production errors
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    if (error.name === 'CastError') error = handleCastErrorDB(error);
-    if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+    if (error.name === 'CastError') error = handleCastErrorDB(error); // errors with paths to the database
+    if (error.code === 11000) error = handleDuplicateFieldsDB(error); // handling duplicate fields in the database
+    if (error.name === 'ValidationError') error = handleValidationErrorDB(error); 
     if (error.name === 'JsonWebTokenerror') error = handleJWTTokenError(error);
     if (error.name === 'TokenExpiredError') error = handleExpiredError(error);
     sendErrorProd(error, res);
   }
-
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-  });
-
-  next();
 };

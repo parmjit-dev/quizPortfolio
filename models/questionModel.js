@@ -41,13 +41,5 @@ const questionSchema = new mongoose.Schema({
 });
 
 const questionLayout = mongoose.model('Question', questionSchema);
-/*
-const testTour = new Tour({
-	name: 'The Forest',
-	rating: 4.7,
-	price: 497
-});
 
-testTour.save().then((doc) => console.log(doc)).catch((error) => console.log(error));
-*/
 module.exports = questionLayout;
