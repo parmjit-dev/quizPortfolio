@@ -13,6 +13,7 @@ const quizSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdBy: String,
 },
 {
   // makes sure virtual properties are shown in outputs

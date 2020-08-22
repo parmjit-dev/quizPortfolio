@@ -33,6 +33,7 @@ const questionSchema = new mongoose.Schema({
 		required: [ true, 'A question must have a correct answer' ]
 	},
 	image: String,
+	createdBy: String,
 },
 	{
 		// makes sure virtual properties are shown in outputs
