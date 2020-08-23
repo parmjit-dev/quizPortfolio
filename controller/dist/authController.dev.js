@@ -9,9 +9,9 @@ var crypto = require('crypto');
 
 var User = require('../models/userModel');
 
-var catchAsync = require('../catchAsync');
+var catchAsync = require('../utils/catchAsync');
 
-var AppError = require('../appError');
+var AppError = require('../utils/appError');
 
 var sendEmail = require('../utils/email');
 /**

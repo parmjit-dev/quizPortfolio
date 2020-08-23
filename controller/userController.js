@@ -1,7 +1,7 @@
 // Users routes
 const User = require('../models/userModel');
-const catchAsync = require('../catchAsync');
-const AppError = require('../appError');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 const handler = require('../utils/handler');
 
 const filter = (bodyObj, ...fields) => {

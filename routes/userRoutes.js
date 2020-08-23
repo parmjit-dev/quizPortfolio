@@ -1,8 +1,8 @@
 const express = require('express');
 
 const app = express();
-const userController = require('./userController');
-const authController = require('./authController');
+const userController = require('../controller/userController');
+const authController = require('../controller/authController');
 
 const router = express.Router();
 app.use('/api/v1/users', router); // creates a sub application
@@ -36,6 +36,6 @@ router.use(authController.restrictTo('admin')); // restricts the following route
 router.delete('/deleteUser',
   userController.deleteUser);
 
-router.route('/').get(userController.getAllUser).post(userController.createUser);
+// router.route('/').get(userController.getAllUser).post(userController.createUser);
 // 100% rest as the url doesn't relate to the functions
 module.exports = router;

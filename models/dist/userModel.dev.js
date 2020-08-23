@@ -47,10 +47,6 @@ var userSchema = new mongoose.Schema({
       }
     }
   },
-  quizzes: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Quiz'
-  },
   photo: String,
   passwordChangedAt: Date,
   passwordResetToken: String,
@@ -90,72 +86,26 @@ userSchema.pre('save', function _callee(next) {
     }
   }, null, this);
 });
-quizSchema.pre('save', function _callee3(next) {
-  var quizPromise;
-  return regeneratorRuntime.async(function _callee3$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          // whenever a save is done on the db - fills the id in the questions field with the data in the 'Questions' document
-          quizPromise = this.quizzes.map(function _callee2(id) {
-            return regeneratorRuntime.async(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return regeneratorRuntime.awrap(Quiz.findById(id));
-
-                  case 2:
-                    return _context2.abrupt("return", _context2.sent);
-
-                  case 3:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            });
-          });
-          _context3.next = 3;
-          return regeneratorRuntime.awrap(Promise.all(quizPromise));
-
-        case 3:
-          this.quizzes = _context3.sent;
-          // overwrites the this.guides
-          next();
-
-        case 5:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, null, this);
-});
-quizSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'quizzes'
-  });
-  next();
-});
 userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-userSchema.methods.correctPassword = function _callee4(candidatePassword, userPassword) {
-  return regeneratorRuntime.async(function _callee4$(_context4) {
+userSchema.methods.correctPassword = function _callee2(candidatePassword, userPassword) {
+  return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          _context4.next = 2;
+          _context2.next = 2;
           return regeneratorRuntime.awrap(bcrypt.compare(candidatePassword, userPassword));
 
         case 2:
-          return _context4.abrupt("return", _context4.sent);
+          return _context2.abrupt("return", _context2.sent);
 
         case 3:
         case "end":
-          return _context4.stop();
+          return _context2.stop();
       }
     }
   });

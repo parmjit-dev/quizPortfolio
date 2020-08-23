@@ -9,6 +9,7 @@ const hpp = require('hpp');
 const questionRouter = require('./routes/questionRoutes');
 const quizRouter = require('./routes/quizRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const userRouter = require('./routes/userRoutes');
 const app = express(); //you don't need to manully define the content type in express
 
 app.set('view engine', 'pug');
@@ -44,4 +45,5 @@ app.use((req, res, next) => { //creates a time for the console
 app.use('/', viewRouter)
 app.use('/api/v1/question', questionRouter); //creates a sub application
 app.use('/api/v1/quiz', quizRouter);
+app.use('/api/v1/users', userRouter);
 module.exports = app; //need to export app

@@ -4,9 +4,9 @@ var express = require('express');
 
 var app = express();
 
-var userController = require('./userController');
+var userController = require('../controller/userController');
 
-var authController = require('./authController');
+var authController = require('../controller/authController');
 
 var router = express.Router();
 app.use('/api/v1/users', router); // creates a sub application
@@ -23,7 +23,7 @@ router.patch('/updateMe', userController.updateMe);
 router["delete"]('/deleteMe', userController.deleteMe);
 router.use(authController.restrictTo('admin')); // restricts the following routes to admins
 
-router["delete"]('/deleteUser', userController.deleteUser);
-router.route('/').get(userController.getAllUser).post(userController.createUser); // 100% rest as the url doesn't relate to the functions
+router["delete"]('/deleteUser', userController.deleteUser); // router.route('/').get(userController.getAllUser).post(userController.createUser);
+// 100% rest as the url doesn't relate to the functions
 
 module.exports = router;

@@ -41,10 +41,6 @@ const userSchema = new mongoose.Schema({
       },
     },
   },
-  quizzes: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Quiz',
-  },
   photo: String,
   passwordChangedAt: Date,
   passwordResetToken: String,
@@ -63,21 +59,6 @@ userSchema.pre('save', async function (next) {
 
   this.confirmedPassword = undefined;
 
-  next();
-});
-
-quizSchema.pre('save', async function(next) { // whenever a save is done on the db - fills the id in the questions field with the data in the 'Questions' document
-  const quizPromise = this.quizzes.map(async (id) => await Quiz.findById(id));
-  
-  this.quizzes = await Promise.all(quizPromise); // overwrites the this.guides
-
-  next();
-});
-
-quizSchema.pre(/^find/, function (next) { 
-  this.populate({
-    path: 'quizzes',
-});
   next();
 });
 

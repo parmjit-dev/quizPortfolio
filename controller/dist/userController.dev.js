@@ -3,9 +3,9 @@
 // Users routes
 var User = require('../models/userModel');
 
-var catchAsync = require('../catchAsync');
+var catchAsync = require('../utils/catchAsync');
 
-var AppError = require('../appError');
+var AppError = require('../utils/appError');
 
 var handler = require('../utils/handler');
 
