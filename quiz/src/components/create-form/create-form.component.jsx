@@ -82,6 +82,8 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value="1" onClick={handleChange}/>
+
           <input
             type="text"
             id="answerSelectionTwo"
@@ -89,6 +91,8 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value="2" onClick={handleChange} />
+
           {' '}
           <input
             type="text"
@@ -97,6 +101,8 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value="3" onClick={handleChange}/>
+
           {' '}
           <input
             type="text"
@@ -105,6 +111,8 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value="4" onClick={handleChange} />
+
         </div>
       </div>
       <button type="submit" className="btn"> Submit Question </button>
