@@ -1,14 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './create-form.style.scss';
-// const useFormField = (initialValue: string = "") => {
-//   const [value, setValue] = React.useState(initialValue);
-//   const onChange = React.useCallback(
-//     (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
-//     []
-//   );
-//   return { value, onChange };
-// };
-
 const CreateQuestion = () => {
   // const response = '';
   const [post, setPost] = useState({
@@ -17,32 +9,41 @@ const CreateQuestion = () => {
     answerSelectionTwo: '',
     answerSelectionThree: '',
     answerSelectionFour: '',
-    correctAnswer: parseInt(''),
+    correctAnswer: parseInt('', 10),
     image: '',
   });
-  const responseToPost = '';
+  // const [post, setPost] = useState('');
+  const [responseToPost, setResponseToPost] = useState('');
+  const [response, setResponse] = useState('');
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const response = await fetch('http://127.0.0.1:3000/api/v1/question', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ body: { post } }),
-  //   });
-  //   const body = await response.text();
-  // // this.setState({ responseToPost: body });
+  // const callAPI = async () => {
+  //   const responseCall = await fetch('http://127.0.0.1:5000/api/v1/question');
+  //   const body = await responseCall.json();
+  //   if (responseCall.status !== 200) throw Error(body.message);
+  //   return body;
   // };
+      // {/* <button type="submit" className="btn" onClick={}> Submit Quiz </button> */}
+
+
+  // useEffect(() => {
+  //   callAPI().then((res) => setResponse({ response: res.express }))
+  //     .catch((err) => console.log(err));
+  // });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://127.0.0.1:5000/api/v1/question', post).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
+  };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    if (id === 'correctAnswer') setPost({ ...post, [id]: parseInt(value, 10) });
     setPost({ ...post, [id]: value });
   };
 
   return (
   // <form onSubmit = {handleSubmit}>
-    <form className="question-form">
+    <form className="question-form" onSubmit={handleSubmit}>
       <div className="form-input-material">
         {/*  htmlFor is to tell react what thehtml entered is going to be for */}
         <label htmlFor="title">
@@ -82,7 +83,7 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value="1" onClick={handleChange}/>
+          <input type="radio" name="correctAnswer" id="correctAnswer" value={1} onClick={handleChange} />
 
           <input
             type="text"
@@ -91,7 +92,7 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value="2" onClick={handleChange} />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value={2} onClick={handleChange} />
 
           {' '}
           <input
@@ -101,7 +102,7 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value="3" onClick={handleChange}/>
+          <input type="radio" name="correctAnswer" id="correctAnswer" value={3} onClick={handleChange} />
 
           {' '}
           <input
@@ -111,7 +112,7 @@ const CreateQuestion = () => {
             onChange={handleChange}
 
           />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value="4" onClick={handleChange} />
+          <input type="radio" name="correctAnswer" id="correctAnswer" value={4} onClick={handleChange} />
 
         </div>
       </div>

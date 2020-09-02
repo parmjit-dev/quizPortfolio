@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 // import { CardList } from './components/card-list/card-list.component';
 // import {setCurrentUser} from './redux/user/user.action'
 // import {connect} from 'react-redux'
@@ -28,13 +27,13 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" />
-          <Route path="/quizzes" />
           <Route path="/signin" />
+          <Route path="/dashboard" />
+          <Route path="/about" />
+          <Route path="/quiz" />
+
         </Switch>
-        <div>
-          Hello
-        </div>
-        <CreateQuestion/>
+        <CreateQuestion />
       </BrowserRouter>
 
     </div>
