@@ -23,7 +23,7 @@ mongoose
     //console.log(con.connections);
     console.log('Connection Successful');
   });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 const server = app.listen(port, () => {
   console.log('Liisten - Rengar 🦁🦁');

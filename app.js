@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors')
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -11,9 +12,6 @@ const quizRouter = require('./routes/quizRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const app = express(); //you don't need to manully define the content type in express
-
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public'))); // any static images will be found in public
 
@@ -42,6 +40,8 @@ app.use((req, res, next) => { //creates a time for the console
 	req.requestTime = new Date().toISOString();
 	next();
 });
+app.use(cors());
+
 app.use('/', viewRouter)
 app.use('/api/v1/question', questionRouter); //creates a sub application
 app.use('/api/v1/quiz', quizRouter);

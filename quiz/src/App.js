@@ -9,9 +9,9 @@ import {
   Route, Switch, Redirect, BrowserRouter,
 } from 'react-router-dom';
 import Header from './components/header/header.component';
-import CreateQuestion from './components/create-form/create-form.component';
+// import CreateQuestion from './components/create-form/create-form.component';
 // import Header from './components/header/header.component';
-
+import quizPage from './pages/createQuiz/createQuiz.page';
 const App = () => {
   const users = [];
   // useEffect(async () => { // runs right after the first render
@@ -30,10 +30,8 @@ const App = () => {
           <Route path="/signin" />
           <Route path="/dashboard" />
           <Route path="/about" />
-          <Route path="/quiz" />
-
+          <Route path="/quiz" component={quizPage}/>
         </Switch>
-        <CreateQuestion />
       </BrowserRouter>
 
     </div>

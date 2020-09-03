@@ -15,6 +15,9 @@ exports.getQuestion = async (req, res) => {
 exports.createQuestion = async (req, res) => {
 	try {
 		const newQuiz = await Question.create(req.body);
+		newQuiz.correctAnswer = parseInt(newQuiz.correctAnswer);
+		console.log(newQuiz)
+		console.log(req.body)
 		res.status(201).json({
 			status: 'success',
 			data: {
@@ -24,7 +27,7 @@ exports.createQuestion = async (req, res) => {
 	} catch (err) {
 		res.status(400).json({
 			status: 'fail',
-			message: `Bad Request ${err}`
+			message: `Bad Request ${req.body.correctAnswer}`
 		});
 	}
 };

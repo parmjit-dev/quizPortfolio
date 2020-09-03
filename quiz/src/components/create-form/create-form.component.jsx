@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './create-form.style.scss';
+
 const CreateQuestion = () => {
-  // const response = '';
+  const api = process.env.REACT_APP_API_QUESTION;
+
   const [post, setPost] = useState({
     question: '',
     answerSelectionOne: '',
@@ -13,8 +15,8 @@ const CreateQuestion = () => {
     image: '',
   });
   // const [post, setPost] = useState('');
-  const [responseToPost, setResponseToPost] = useState('');
-  const [response, setResponse] = useState('');
+  // const [responseToPost, setResponseToPost] = useState('');
+  // const [response, setResponse] = useState('');
 
   // const callAPI = async () => {
   //   const responseCall = await fetch('http://127.0.0.1:5000/api/v1/question');
@@ -30,9 +32,10 @@ const CreateQuestion = () => {
   //     .catch((err) => console.log(err));
   // });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:5000/api/v1/question', post).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
+    await axios.post(api, post)
+    .then((res) => { console.log(res); }).catch((err) => { console.log(err); });
   };
 
   const handleChange = (e) => {
@@ -42,7 +45,6 @@ const CreateQuestion = () => {
   };
 
   return (
-  // <form onSubmit = {handleSubmit}>
     <form className="question-form" onSubmit={handleSubmit}>
       <div className="form-input-material">
         {/*  htmlFor is to tell react what thehtml entered is going to be for */}
@@ -50,7 +52,7 @@ const CreateQuestion = () => {
           {' '}
           <h1>Question Title</h1>
           <input
-            type="title"
+            type="text"
             id="question"
             className="form-control-material"
             onChange={handleChange}
