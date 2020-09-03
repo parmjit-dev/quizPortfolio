@@ -30,10 +30,9 @@ const SignIn = () => {
   };
   return (
     <div>
-      <h2> Already have an account </h2>
-      <span> SignIn </span>
-
       <form className="sign-in-form" onSubmit={handleSubmit}>
+			<h2> Already have an account </h2>
+      <span> SignIn </span>
         <input
           id="email"
           type="email"
