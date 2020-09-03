@@ -8,10 +8,10 @@ import './header.style.scss';
 const Header = () => (
   <div className="header">
     <div className="options">
-      <span className="option" to="/quiz"> quiz </span>
-      <span className="option" to="/dashboard"> dashboard </span>
-      <span className="option" to="/about"> About </span>
-      <span className="option" to="/signin"> Signin </span>
+      <Link className="option" to="/quiz"> quiz </Link>
+      <Link className="option" to="/dashboard"> dashboard </Link>
+      <Link className="option" to="/about"> About </Link>
+      <Link className="option" to="/signin"> Signin </Link>
 
     </div>
   </div>

@@ -26,14 +26,14 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'A user must have a name'],
-    minlength: [10, 'A tour must have a minimum of 10 Characters'],
+    required: [true, 'A user must have a password'],
+    minlength: [8, 'A password must have a minimum of 8 Characters'],
     select: false,
     // validate: validator.isAlpha,
   },
   confirmedPassword: {
     type: String,
-    required: [true, 'A user must have a name'],
+    required: [true, 'A user must have a password confirm'],
     validate: {
       // only works on save
       validator(el) {

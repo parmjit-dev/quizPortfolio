@@ -1,75 +1,58 @@
 import React, { useState } from 'react';
-import dotenv from 'dotenv';
 import axios from 'axios';
 import './sign-up.styles.scss';
 
-dotenv.config({ path: './config.env' });
-
-const signUp = () => {
+const SignUp = () => {
+  const api = process.env.REACT_APP_API_SIGN_UP;
   const [post, setPost] = useState({
-    displayName: '',
+    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmedPassword: '',
   });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (password !== confirmPassword) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { password, confirmedPassword } = post;
+    if (password !== confirmedPassword) {
       alert("passwords don't match"); // adjust the alert button
       return;
     }
-
-    try {
-      await axios.post(process.env.API_SIGN_IN_UP, post)
-        .then((res) => { console.log(res); }).catch((err) => { console.log(err); });
-    } catch (err) {
-      alert(err);
-    }
+    await axios.post(api, post)
+      .then((res) => { console.log(res); }).catch((err) => { console.log(err); });
   };
 
-  const handleChange = (event) => {
-    const { id, value } = event.target;
-    setPost({ [id]: value });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setPost({...post,  [id]: value });
   };
   return (
-    <div className="sign-up">
+    <form className="sign-up-form" onSubmit={handleSubmit}>
       <h2 className="title"> Don't Have an Account? </h2>
-      <span> Sign up with email and password</span>
-      <form className="sign-up-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="displayName"
-          onChange={handleChange}
-          label="Display Name"
-          required
-        />
-        <input
-          type="email"
-          id="email"
-          onChange={handleChange}
-          label="Email"
-          required
-        />
-        <input
-          type="password"
-          id="password"
-          onChange={handleChange}
-          label="Password"
-          required
-        />
-        <input
-          type="text"
-          id="confirmPassword"
-          onChange={handleChange}
-          label="Confirm Passowrd"
-          required
-        />
-      </form>
+      <span> Sign up with email and password </span>
+      <input
+        type="text"
+        id="name"
+        onChange={handleChange}
+      />
+      <input
+        type="email"
+        id="email"
+        onChange={handleChange}
+      />
+      <input
+        type="password"
+        id="password"
+        onChange={handleChange}
+      />
+      <input
+        type="password"
+        id="confirmedPassword"
+        onChange={handleChange}
+      />
       <button type="submit"> Sign Up </button>
-    </div>
+    </form>
   );
 };
 
-export default signUp;
+export default SignUp;

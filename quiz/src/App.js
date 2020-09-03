@@ -4,13 +4,11 @@ import './App.css';
 // import { CardList } from './components/card-list/card-list.component';
 // import {setCurrentUser} from './redux/user/user.action'
 // import {connect} from 'react-redux'
-// import SignInAndUp from './pages/sign/sign.component';
+import SignInAndUp from './pages/sign.component';
 import {
   Route, Switch, Redirect, BrowserRouter,
 } from 'react-router-dom';
 import Header from './components/header/header.component';
-// import CreateQuestion from './components/create-form/create-form.component';
-// import Header from './components/header/header.component';
 import quizPage from './pages/createQuiz/createQuiz.page';
 const App = () => {
   const users = [];
@@ -22,19 +20,16 @@ const App = () => {
   //   })
   // const changeDog = shuffle(dog);
   return (
-    <div>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route exact path="/" />
-          <Route path="/signin" />
+          <Route path="/signin" component={SignInAndUp}/>
           <Route path="/dashboard" />
           <Route path="/about" />
           <Route path="/quiz" component={quizPage}/>
         </Switch>
       </BrowserRouter>
-
-    </div>
 
   );
 };
