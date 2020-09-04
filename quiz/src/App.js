@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-// import { CardList } from './components/card-list/card-list.component';
-// import {setCurrentUser} from './redux/user/user.action'
-// import {connect} from 'react-redux'
 import SignInAndUp from './pages/sign.component';
 import {
   Route, Switch, Redirect, BrowserRouter,
 } from 'react-router-dom';
 import Header from './components/header/header.component';
-import quizPage from './pages/createQuiz/createQuiz.page';
+import QuizPage from './pages/createQuiz/createQuiz.page';
+
 const App = () => {
-  const users = [];
+  const [ userAuth, setUserAuth ] = useState(false);
   // useEffect(async () => { // runs right after the first render
   //     const usersData = await axios('https://jsonplaceholder.typicode.com/users');
   //     // console.log(users.data);
@@ -24,10 +22,10 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path="/" />
-          <Route path="/signin" component={SignInAndUp}/>
+          <Route path="/signin" render={props => (<SignInAndUp  {...props } userAuth={ userAuth } />)}/>
           <Route path="/dashboard" />
           <Route path="/about" />
-          <Route path="/quiz" component={quizPage}/>
+          <Route path="/quiz" render={ props => (<QuizPage { ...props } userAuth={ userAuth }/>)} />
         </Switch>
       </BrowserRouter>
 
