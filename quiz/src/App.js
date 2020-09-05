@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {
@@ -31,13 +31,21 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" />
-        <Route path="/signin" component={SignInAndUp} />
+        <Route
+          path="/signin"
+          render={() => {
+            if (!globalState.state.loggedIn) {
+              return <SignInAndUp />;
+            }
+            return <DashBoard />;
+          }}
+        />
         <Route path="/dashboard" component={DashBoard} />
         <Route path="/about" />
         <Route
           path="/quiz"
           render={() => {
-            if (!globalState.state.state.loggedIn) {
+            if (!globalState.state.loggedIn) {
               return <Redirect to={{ pathname: '/signin' }} />;
             }
             return <QuizPage />;

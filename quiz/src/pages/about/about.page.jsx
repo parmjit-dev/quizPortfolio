@@ -8,6 +8,9 @@ const DashBoard = (props) => {
   return (
     <div className="dashboard">
     <h1> Dashboard </h1>
+      <h1>
+        {globalState.user}
+      </h1>
     </div>
   );
 };
