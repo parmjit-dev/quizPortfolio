@@ -39,10 +39,10 @@ const CreateQuestion = () => {
 
   const handleSuccess = async (res) => {
     // console.log(userData.data);
-    const {questions} = quizPost;
+    const { questions } = quizPost;
     questions.push(res.data.data.Question._id);
     await dispatch({ ...res.data.data, type: 'SET_QUESTION' });
-    setQuizPost({...quizPost,[questions]: questions});
+    await setQuizPost({ ...quizPost, [questions]: questions });
   };
 
   const handleSubmit = async (e) => {
@@ -60,8 +60,10 @@ const CreateQuestion = () => {
 
   const handleSuccessQuiz = async (e) => {
     e.preventDefault();
-    console.log(quizPost);
-    await axios.post(quizAPI, quizPost);
+    const { questions, title, user } = quizPost;
+    const newPost = { title, questions, user };
+    console.log(newPost);
+    await axios.post(quizAPI, newPost);
   };
 
   return (
@@ -136,7 +138,8 @@ const CreateQuestion = () => {
           </div>
         </div>
         <button type="submit" className="btn"> Submit Question </button>
-        <form className="quizForm" onSubmit={handleSuccessQuiz}>
+      </form>
+      <form className="quizForm" onSubmit={handleSuccessQuiz}>
           <div>
             <label> Question Title </label>
             <input
@@ -148,7 +151,6 @@ const CreateQuestion = () => {
             <button type="submit" className="btn"> Submit Quiz </button>
           </div>
         </form>
-      </form>
     </div>
   );
 };
