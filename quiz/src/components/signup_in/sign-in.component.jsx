@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { store } from '../../store/store';
@@ -24,7 +25,8 @@ axios.interceptors.request.use(
 
 const SignIn = (props) => {
   const globalState = useContext(store);
-  const {dispatch} = globalState;
+  const { dispatch } = globalState;
+  const history = useHistory();
   // console.log(globalState);
   const [profileState, setProfileState] = useState(props);
   const storedJwt = localStorage.getItem('token');
@@ -35,9 +37,12 @@ const SignIn = (props) => {
   });
   const [jwt, setJwt] = useState(storedJwt || null);
 
-  const handleSuccess = (userData) => {
+  const handleSuccess = async (userData) => {
+    userData.data.user.loggedIn = true;
+    console.log(userData.data);
     // console.log(userData.data);
-    dispatch({ ...userData.data, type: 'SET_CURRENT_USER'});
+    await dispatch({ ...userData.data, type: 'SET_CURRENT_USER' });
+    history.push('/quiz');
   };
 
   const handleSubmit = async (e) => {

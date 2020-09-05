@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CreateQuestion from '../../components/create-form/create-form.component';
 import './createQuiz.style.scss';
+import { store } from '../../store/store';
 
-const QuizPage = (props) => {
-  const [profileState, setProfileState] = useState(props);
+const QuizPage = () => {
+  const globalState = useContext(store);
   return (
     <div>
-      <CreateQuestion { ...profileState} />
+      <CreateQuestion {...globalState} />
     </div>
   );
 };

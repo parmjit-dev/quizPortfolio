@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {
@@ -8,8 +8,11 @@ import SignInAndUp from './pages/sign/sign.component';
 import Header from './components/header/header.component';
 import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
+import { store } from './store/store';
 
-const App = () =>
+const App = () => {
+  const globalState = useContext(store);
+  console.log(globalState);
   // const handleLogin = (data) => {
   //   setUserAuth({
   //     login: true,
@@ -23,7 +26,7 @@ const App = () =>
   //     console.log(this.dogs)
   //   })
   // const changeDog = shuffle(dog);
-  (
+  return (
     <BrowserRouter>
       <Header />
       <Switch>
@@ -31,9 +34,18 @@ const App = () =>
         <Route path="/signin" component={SignInAndUp} />
         <Route path="/dashboard" component={DashBoard} />
         <Route path="/about" />
-        <Route path="/quiz" component={QuizPage} />
+        <Route
+          path="/quiz"
+          render={() => {
+            if (!globalState.state.state.loggedIn) {
+              return <Redirect to={{ pathname: '/signin' }} />;
+            }
+            return <QuizPage />;
+          }}
+        />
       </Switch>
     </BrowserRouter>
 
   );
+};
 export default App;
