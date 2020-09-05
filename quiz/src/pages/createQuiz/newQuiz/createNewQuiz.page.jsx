@@ -8,7 +8,6 @@ const QuizPage = () => {
   return (
     <div>
       <CreateQuestion {...globalState} />
-      
     </div>
   );
 };

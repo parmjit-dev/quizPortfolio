@@ -9,7 +9,6 @@ const questionSchema = new mongoose.Schema({
 	question: {
 		type: String,
 		required: [ true, 'A question must have a question to ask' ],
-		unique: true,
 		trim: true
 	},
 	answerSelectionOne: {

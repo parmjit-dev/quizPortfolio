@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { StateProvider } from './store/store.js';
+import { StateProvider } from './store/store';
+import { QuestionStateProvider } from './store/questionStore'
 
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider>
-      <App />
+      <QuestionStateProvider>
+        <App />
+      </QuestionStateProvider>
     </StateProvider>
   </React.StrictMode>,
 

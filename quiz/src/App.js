@@ -8,11 +8,14 @@ import SignInAndUp from './pages/sign/sign.component';
 import Header from './components/header/header.component';
 import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
+import About from './pages/about/about.page';
 import { store } from './store/store';
+import {questionStore} from './store/questionStore'
 
 const App = () => {
   const globalState = useContext(store);
-  console.log(globalState);
+  const globalQuestionState = useContext(questionStore);
+  console.log(globalQuestionState);
   // const handleLogin = (data) => {
   //   setUserAuth({
   //     login: true,
@@ -41,7 +44,7 @@ const App = () => {
           }}
         />
         <Route path="/dashboard" component={DashBoard} />
-        <Route path="/about" />
+        <Route path="/about" component={About}/>
         <Route
           path="/quiz"
           render={() => {

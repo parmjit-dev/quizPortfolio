@@ -1,9 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './create-form.style.scss';
+import { questionStore } from '../../store/questionStore';
+import { store } from '../../store/store';
 
+const api = process.env.REACT_APP_API_QUESTION;
+const quizAPI = process.env.REACT_APP_API_QUIZ;
+
+axios.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem('token');
+    config.headers.authorization = `Bearer ${token}`;
+    console.log(config);
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 const CreateQuestion = () => {
-  const api = process.env.REACT_APP_API_QUESTION;
+  const globalState = useContext(questionStore);
+  const { dispatch } = globalState;
+  const globalUserState = useContext(store);
 
   const [post, setPost] = useState({
     question: '',
@@ -14,112 +30,126 @@ const CreateQuestion = () => {
     correctAnswer: parseInt('', 10),
     image: '',
   });
-  // const [post, setPost] = useState('');
-  // const [responseToPost, setResponseToPost] = useState('');
-  // const [response, setResponse] = useState('');
 
-  // const callAPI = async () => {
-  //   const responseCall = await fetch('http://127.0.0.1:5000/api/v1/question');
-  //   const body = await responseCall.json();
-  //   if (responseCall.status !== 200) throw Error(body.message);
-  //   return body;
-  // };
-      // {/* <button type="submit" className="btn" onClick={}> Submit Quiz </button> */}
+  const [quizPost, setQuizPost] = useState({
+    title: '',
+    questions: [],
+    user: globalUserState.state._id,
+  });
 
-
-  // useEffect(() => {
-  //   callAPI().then((res) => setResponse({ response: res.express }))
-  //     .catch((err) => console.log(err));
-  // });
+  const handleSuccess = async (res) => {
+    // console.log(userData.data);
+    const {questions} = quizPost;
+    questions.push(res.data.data.Question._id);
+    await dispatch({ ...res.data.data, type: 'SET_QUESTION' });
+    setQuizPost({...quizPost,[questions]: questions});
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post(api, post)
-    .then((res) => { console.log(res); }).catch((err) => { console.log(err); });
+      .then((res) => { handleSuccess(res); }).catch((err) => { console.log(err); });
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    if (id === 'correctAnswer') setPost({ ...post, [id]: parseInt(value, 10) });
+    if (id === 'title') return setQuizPost({ ...quizPost, [id]: value });
+    if (id === 'correctAnswer') return setPost({ ...post, [id]: parseInt(value, 10) });
     setPost({ ...post, [id]: value });
   };
 
-  return (
-    <form className="question-form" onSubmit={handleSubmit}>
-      <div className="form-input-material">
-        {/*  htmlFor is to tell react what thehtml entered is going to be for */}
-        <label htmlFor="title">
-          {' '}
-          <h1>Question Title</h1>
-          <input
-            type="text"
-            id="question"
-            className="form-control-material"
-            onChange={handleChange}
-          />
-          {' '}
-        </label>
+  const handleSuccessQuiz = async (e) => {
+    e.preventDefault();
+    console.log(quizPost);
+    await axios.post(quizAPI, quizPost);
+  };
 
-      </div>
-      <div className="form-input-material">
+  return (
+    <div>
+      <form className="question-form" onSubmit={handleSubmit}>
         <div className="form-input-material">
-          <label htmlFor="image">
+          {/*  htmlFor is to tell react what thehtml entered is going to be for */}
+          <label htmlFor="title">
             {' '}
-            Image
+            <h1>Question Title</h1>
+            <input
+              type="text"
+              id="question"
+              className="form-control-material"
+              onChange={handleChange}
+            />
+            {' '}
+          </label>
+
+        </div>
+        <div className="form-input-material">
+          <div className="form-input-material">
+            <label htmlFor="image">
+              {' '}
+              Image
+
+              <input
+                type="image"
+                id="image"
+                className="form-control-material"
+              />
+            </label>
+          </div>
+        </div>
+        <div className="form-input-material">
+          <h1 htmlFor="answers"> Answers </h1>
+          <div className="form-input-material">
+            <input
+              type="text"
+              id="answerSelectionOne"
+              className="form-control-material"
+              onChange={handleChange}
+            />
+            <input type="radio" name="correctAnswer" id="correctAnswer" value={1} onClick={handleChange} />
 
             <input
-              type="image"
-              id="image"
+              type="text"
+              id="answerSelectionTwo"
               className="form-control-material"
+              onChange={handleChange}
             />
-          </label>
+            <input type="radio" name="correctAnswer" id="correctAnswer" value={2} onClick={handleChange} />
+
+            {' '}
+            <input
+              type="text"
+              id="answerSelectionThree"
+              className="form-control-material"
+              onChange={handleChange}
+            />
+            <input type="radio" name="correctAnswer" id="correctAnswer" value={3} onClick={handleChange} />
+
+            {' '}
+            <input
+              type="text"
+              id="answerSelectionFour"
+              className="form-control-material"
+              onChange={handleChange}
+            />
+            <input type="radio" name="correctAnswer" id="correctAnswer" value={4} onClick={handleChange} />
+
+          </div>
         </div>
-      </div>
-      <div className="form-input-material">
-        <h1 htmlFor="answers"> Answers </h1>
-        <div className="form-input-material">
-          <input
-            type="text"
-            id="answerSelectionOne"
-            className="form-control-material"
-            onChange={handleChange}
-
-          />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value={1} onClick={handleChange} />
-
-          <input
-            type="text"
-            id="answerSelectionTwo"
-            className="form-control-material"
-            onChange={handleChange}
-
-          />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value={2} onClick={handleChange} />
-
-          {' '}
-          <input
-            type="text"
-            id="answerSelectionThree"
-            className="form-control-material"
-            onChange={handleChange}
-
-          />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value={3} onClick={handleChange} />
-
-          {' '}
-          <input
-            type="text"
-            id="answerSelectionFour"
-            className="form-control-material"
-            onChange={handleChange}
-
-          />
-          <input type="radio" name="correctAnswer" id="correctAnswer" value={4} onClick={handleChange} />
-
-        </div>
-      </div>
-      <button type="submit" className="btn"> Submit Question </button>
-    </form>
+        <button type="submit" className="btn"> Submit Question </button>
+        <form className="quizForm" onSubmit={handleSuccessQuiz}>
+          <div>
+            <label> Question Title </label>
+            <input
+              type="text"
+              id="title"
+              className="form-control-material"
+              onChange={handleChange}
+            />
+            <button type="submit" className="btn"> Submit Quiz </button>
+          </div>
+        </form>
+      </form>
+    </div>
   );
 };
 

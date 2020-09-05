@@ -1,18 +1,40 @@
 import React, { useState, useContext } from 'react';
 import { store } from '../../store/store';
-import './dashboard.style.scss';
+// import './dashboard.style.scss';
 
-const DashBoard = (props) => {
+const About = (props) => {
   const globalState = useContext(store);
   console.log(globalState);
   return (
     <div className="dashboard">
-    <h1> Dashboard </h1>
-      <h1>
-        {globalState.user}
-      </h1>
+    <h1> About Quiz Maker </h1>
+      <p>
+        Welcome to Quiz Maker ✌
+        This is For Parmjit Singh's Portfolio
+      </p>
+      <h2>
+      Key Features:
+        <li>
+            User login and sign up using JWT
+        </li>
+        <li>
+            Local Storage for user and question
+        </li>
+        <li>
+            Adding and storing images
+        </li>
+        <li>
+            Emailing and abilty to play and share quizzes
+        </li>
+      </h2>
+      <h2>
+        I hope you enjoy the Application
+      </h2>
+      <h3>
+        Made with the MERN Stack
+      </h3>
     </div>
   );
 };
 
-export default DashBoard
+export default About;

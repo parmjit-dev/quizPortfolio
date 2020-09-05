@@ -12,12 +12,9 @@ const api = process.env.REACT_APP_API_SIGN_IN;
 
 axios.interceptors.request.use(
   (config) => {
-    const { origin } = new URL(config.url);
-    const allowedOrigins = [api];
+
     const token = localStorage.getItem('token');
-    if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`;
-    }
     return config;
   },
   (error) => Promise.reject(error),
@@ -49,7 +46,7 @@ const SignIn = (props) => {
     e.preventDefault();
 
     try {
-      axios.post(api, post).then((res) => {
+      await axios.post(api, post).then((res) => {
         localStorage.setItem('token', res.data.token);
         setJwt(res.data.token);
         // console.log(res);

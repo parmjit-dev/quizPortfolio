@@ -9,6 +9,10 @@ const quizSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Question'
   }],
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
   public: {
     type: Boolean,
     default: false,
@@ -27,6 +31,13 @@ quizSchema.pre(/^find/, function (next) { // whenever a find request is made - p
 });
   next();
 });
+
+quizSchema.pre('save', function (next) {
+  this.populate({
+    path: 'user',
+  });
+  next();
+}) 
 
 quizSchema.pre('save', async function(next) { // whenever a save is done on the db - fills the id in the questions field with the data in the 'Questions' document
   const questionsPromise = this.questions.map(async (id) => await Question.findById(id));
