@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SignIn from './sign-in.component';
-import SignUp from './sign-up.component';
+import SignIn from '../../components/signup_in/sign-in.component';
+import SignUp from '../../components/signup_in/sign-up.component';
 import './sign.style.scss';
 
 const SignInAndUp = (props) => {
