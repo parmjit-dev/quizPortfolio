@@ -9,6 +9,10 @@ exports.createQuiz = handler.createOne(Quiz);
 exports.deleteQuiz = handler.deleteOne(Quiz);
 exports.updateQuiz = handler.updateOne(Quiz);
 
+// exports.getAllUserQuiz = catchAsync( asyc(req, res, next) => {
+// 	const quiz = await Quiz.find()
+// })
+
 exports.updateAddQuestion = catchAsync( async (req, res, next) => {
 		const quiz = await Quiz.findById(req.params.id);
 		if (!quiz) { return next(new AppError('No document found with this ID', 404)); }

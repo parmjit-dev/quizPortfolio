@@ -1,12 +1,23 @@
 import React from 'react';
 import './card.component.scss';
-export const Card = (props) => {
-	// console.log(props.monsters.name);
+import {store} from '../../store/store';
+
+const Card = (quiz) => {
+	const {title} = quiz;
 	return (
-		<div className="card-container">
-			<img alt="monster" src={`https://robohash.org/${props.users.id}?set=set2&size=180x180`} />
-			<h1> {props.users.name} </h1>
-			<p> {props.users.email} </p>
+	<div className='quiz-collections'>
+		{/* <div
+			className="image"
+			style={{
+				backgroundImage: `url(${imageUrl})`
+			}}
+		/> */}
+		<div className="collection-footer">
+			<span className="name">{title}</span>
+			{/* <span className="price">{price}</span> */}
 		</div>
-	);
-};
+		{/* <CustomButton onClick={() => addItem(item)} inverted> Add To Cart </CustomButton> */}
+	</div>
+	)}
+
+export default Card;
