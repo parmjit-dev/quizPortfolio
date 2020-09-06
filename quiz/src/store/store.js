@@ -8,14 +8,19 @@ import React, { createContext, useReducer } from 'react';
 
 const initialState = JSON.parse(localStorage.getItem('state')) || { state: { loggedIn: false } };
 const store = createContext(initialState);
+let newState = {}
 const { Provider } = store;
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state = initialState, action) => {
     switch (action.type) {
       case 'SET_CURRENT_USER':
-        const newState = {...action.user, loggedIn: true };
+        newState = {...action.user, loggedIn: true };
         localStorage.setItem('state', JSON.stringify(newState));
+        return newState;
+      case 'LOGOUT':
+        localStorage.clear();
+        newState = {...action.loggedIn};
         return newState;
       default:
         throw new Error();

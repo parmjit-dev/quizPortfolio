@@ -8,9 +8,10 @@ import SignInAndUp from './pages/sign/sign.component';
 import Header from './components/header/header.component';
 import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
+import Landing from './pages/landing/landing_page';
 import About from './pages/about/about.page';
 import { store } from './store/store';
-import {questionStore} from './store/questionStore'
+import {questionStore} from './store/questionStore';
 
 const App = () => {
   const globalState = useContext(store);
@@ -33,7 +34,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" />
+        <Route exact path="/" component={Landing}/>
         <Route
           path="/signin"
           render={() => {

@@ -31,10 +31,7 @@ exports.createOne = (Model) => catchAsync(async (req, res, next) => {
   let modeledReq = req.body;
 
   if (req.body.createdBy) { modeledReq.createdBy = req.user._Id }
-  const doc = await Model.create(modeledReq, {
-    new: true,
-    runValidators: true,
-  }); // .create is a mongoose function - which takes a model and the request body
+  const doc = await Model.create(modeledReq); // .create is a mongoose function - which takes a model and the request body
   res.status(201).json({
     status: 'success',
     data: {
