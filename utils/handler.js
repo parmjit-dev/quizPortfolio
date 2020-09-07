@@ -57,15 +57,22 @@ exports.getOne = (Model, population) => catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAll = (Model) => catchAsync(async (req, res, next) => {
+exports.getAll = (Model, population) => catchAsync(async (req, res, next) => {
   let filter = {}; // only for populating reviews with tours
   if (req.params.tourId) filter = { tour: req.params.tourId };
 
-  const modeledQuery = new APIFeatures(Model.find(filter), req.query).filter().sort().limit()
+  let modeledQuery = new APIFeatures(Model.find(filter), req.query).filter().sort().limit()
     .pagination();
+
+  if (population) modeledQuery = modeledQuery.query.populate(population);
+
+  const doc = await modeledQuery;
+
+  if (!doc) {
+    return next(new AppError('No tour found with that ID', 404));
+  }
     // you pass the finder or query you want to use -- same as the mongo db basically.
     // execute the query -- after modelling the query you then consume it.
-  const doc = await modeledQuery.query.explain();
   res.status(200).json({
     status: 'success',
     requestAt: req.requestTime,

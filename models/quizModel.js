@@ -26,8 +26,9 @@ const quizSchema = new mongoose.Schema({
 
 quizSchema.pre(/^find/, function (next) { // whenever a find request is made - populates the questions field in the quiz with the requested data in Question
   this.populate({
-    path: 'questions',
-});
+    path: 'Question',
+
+})
   next();
 });
 

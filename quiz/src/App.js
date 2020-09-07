@@ -34,7 +34,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" component={Landing}/>
+        <Route exact path="/" render={()=> (<Landing/>)}/>
         <Route
           path="/signin"
           render={() => {
