@@ -6,6 +6,7 @@
 /quiz/package.json
 /quiz/package-lock.json
 /quiz/node_modules
+/quiz/dist
 
 config.env
 .gitignore

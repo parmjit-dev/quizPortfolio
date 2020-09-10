@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
-import { store } from '../../store/store';
-// import Card from '../card/card.component';
+import Card from '../card/card.component';
 
 import PreviewCollection from './preview-collection.component';
 // import {connect} from 'react-redux';
@@ -11,31 +9,26 @@ import PreviewCollection from './preview-collection.component';
 // import './collections-overview.style.scss';
 
 // import {PreviewCollection} from '../preview-collection/preview-colleciton.component'
-const api = process.env.REACT_APP_API_QUIZ;
+// { /* { idArray.forEach((idElement) => titleArray.forEach((titleElement) => <PreviewCollection id={idElement} title={titleElement} />))} */ }
 
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    config.headers.authorization = `Bearer ${token}`;
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
-
-const CollectionsOverview = async () => {
-  const globalUserStore = useContext(store);
-  const { state } = globalUserStore;
-  const userQuiz = await axios.get(`${api}?user=${state._id}`);
+const CollectionsOverview = (titles, ID) => {
+  console.log(titles, ID);
+  // const values = Object.entries(props);
+  // // for (let i = 0; i<values.length;i++) {
+  // // }
+  // const { titleArray, idArray } = values[0];
+  // // console.log(typeof titleArray);
+  // console.log(values);
+  // titles.forEach((i) => (console.log(i)));
+  // // values[0].map()
+  // // });
   return (
     <div className="collections-overview">
-    <h1> {userQuiz }</h1>
-      {/* {userQuiz.map(({ id, ...otherCollectionProps }) => ( */}
-        {/* <PreviewCollection key={id} {...otherCollectionProps} /> */}
-      {/* ))} */}
+      {/* {loop} */}
+      
     </div>
   );
 };
-
 // const mapState = createStructeredSelector({
 //   collections: selectCollections,
 // });
