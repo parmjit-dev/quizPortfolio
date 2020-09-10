@@ -10,6 +10,7 @@ import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
 import Landing from './pages/landing/landing_page';
 import About from './pages/about/about.page';
+import playQuiz from './pages/playQuiz/playQuiz.page';
 import { store } from './store/store';
 import {questionStore} from './store/questionStore';
 
@@ -55,6 +56,8 @@ const App = () => {
             return <QuizPage />;
           }}
         />
+        <Route path="/playQuiz/:ID" component={playQuiz} />
+
       </Switch>
     </BrowserRouter>
 

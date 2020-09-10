@@ -40,11 +40,12 @@ const DashBoard = () => {
   const array = Object.values(titles);
   return (
     <div className="dashboard">
-      <h1> Dashboard </h1>
+      <h1> Dashboard: </h1>
+      <h2> Your Quizzes </h2>
       {/* <h1>{quiz.titleArray}</h1> */}
       {/* <CollectionsOverview /> */}
       <div>
-        {array.map((value, index) => <div><Card titles={value} ID={id[index]} /></div>)}
+        {array.map((value, index) => <div><Card ID={id[index]} titles={value} /></div>)}
       </div>
       {/* <Card titles={title} ID={id} /> */}
     </div>
