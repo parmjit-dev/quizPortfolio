@@ -10,9 +10,9 @@ import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
 import Landing from './pages/landing/landing_page';
 import About from './pages/about/about.page';
-import playQuiz from './pages/playQuiz/playQuiz.page';
+import PlayQuizPage from './pages/playQuiz/playQuiz.page';
 import { store } from './store/store';
-import {questionStore} from './store/questionStore';
+import { questionStore } from './store/questionStore';
 
 const App = () => {
   const globalState = useContext(store);
@@ -35,7 +35,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" render={()=> (<Landing/>)}/>
+        <Route exact path="/" render={() => (<Landing />)} />
         <Route
           path="/signin"
           render={() => {
@@ -46,7 +46,7 @@ const App = () => {
           }}
         />
         <Route path="/dashboard" component={DashBoard} />
-        <Route path="/about" component={About}/>
+        <Route path="/about" component={About} />
         <Route
           path="/quiz"
           render={() => {
@@ -56,7 +56,7 @@ const App = () => {
             return <QuizPage />;
           }}
         />
-        <Route path="/playQuiz/:ID" component={playQuiz} />
+        <Route path="/playQuiz/" component={PlayQuizPage} />
 
       </Switch>
     </BrowserRouter>

@@ -12,7 +12,7 @@ const Card = (props) => {
         className="image"
         style={{ backgroundImage: 'url(https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg)' }}
         // onClick={}
-        to={`/playQuiz/${ID}`}
+        to={`/playQuiz/?ID=${ID}`}
       />
       <div className="collection-footer">
         <span className="name">{titles}</span>

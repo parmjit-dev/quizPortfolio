@@ -5,12 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StateProvider } from './store/store';
 import { QuestionStateProvider } from './store/questionStore';
+import { ScoreStateProvider } from './store/scoreStore';
 
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider>
       <QuestionStateProvider>
-        <App />
+        <ScoreStateProvider>
+          <App />
+        </ScoreStateProvider>
       </QuestionStateProvider>
     </StateProvider>
   </React.StrictMode>,
