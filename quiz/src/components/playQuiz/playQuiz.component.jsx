@@ -10,13 +10,13 @@ const quizAPI = process.env.REACT_APP_API_QUIZ;
 const PlayQuiz = () => {
   const [quiz, setQuiz] = useState({
     title: '',
-    questions: {},
+    questions: [],
   });
   useEffect(() => {
     async function getQuiz() {
-      const ID = window.location.search;
-      const value = ID.split('=');
-      const Quiz = await axios.get(`${quizAPI}?_id=${value[1]}`);
+      const param = window.location.search;
+      const id = param.split('=');
+      const Quiz = await axios.get(`${quizAPI}?_id=${id[1]}`);
       const { doc } = Quiz.data.data;
       console.log(doc[0]);
       const quizDoc = doc[0];
@@ -24,13 +24,14 @@ const PlayQuiz = () => {
     }
     getQuiz();
   }, []);
+
   return (
     <div>
       <h1>
         {' '}
         {`${quiz.title} Quiz`}
       </h1>
-      <Play question={quiz.questions.title} answers={[quiz.questions.answerSelectionOne,quiz.questions.answerSelectionTwo,quiz.questions.answerSelectionThree,quiz.questions.answerSelectionFour]} correctAnswer={quiz.questions.correctAnswer}/>
+      <Play props={quiz} />
     </div>
   );
 };
