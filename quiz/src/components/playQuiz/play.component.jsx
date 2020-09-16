@@ -18,6 +18,11 @@ const Play = (props) => {
     correctAnswer: '',
   });
 
+  const [hidden, setHidden] = useState('');
+  const [active, setActive] = useState('hidden');
+
+  const { correctAnswer, currentQuestion } = questionState;
+
   useEffect(() => {
     function setElements() {
       handleChange();
@@ -29,7 +34,7 @@ const Play = (props) => {
     if (questions.length > 0) {
       setQuestionState((state) => ({
         ...state,
-        currentScore: 0,
+        currentScore: questionState.currentScore,
         currentQuestion: (questionState.currentQuestion),
         title: questions[questionState.currentQuestion].question,
         optionOne: questions[questionState.currentQuestion].answerSelectionOne,
@@ -42,38 +47,56 @@ const Play = (props) => {
   };
 
   const handleClick = (e) => {
-    console.log(e.target.id);
-    setQuestionState({ ...questionState, currentQuestion: (questionState.currentQuestion++) });
-    if ((questions.length >= questionState.currentQuestion) === true) {
-      handleChange();
+    const { id } = e.target;
+    if (id == correctAnswer) {
+      setQuestionState({ ...questionState, currentQuestion: (questionState.currentQuestion++), currentScore: questionState.currentScore++ });
+      if ((questions.length > questionState.currentQuestion) === true) {
+        handleChange();
+      } else {
+        setHidden('hidden');
+        setActive('active');
+      }
+    } else {
+      setQuestionState({ ...questionState, currentQuestion: (questionState.currentQuestion++) });
+      if ((questions.length > questionState.currentQuestion) === true) {
+        handleChange();
+      } else {
+        setHidden('hidden');
+        setActive('active');
+      }
     }
   };
 
   return (
-    <div className="question-container">
-      <h1 id="questionTitle">
-        {questionState.title}
-        ;
+    <div onClick={(e) => (console.log(e.target.className))}>
+      <h1 className={`score ${active}`}>
+        {`You Scored ${questionState.currentScore}`}
       </h1>
-      <div id="results" />
-      <span>
-        <img className="question-image" src="https://www.w3schools.com/images/w3schools_green.jpg" />
-      </span>
+      <div className={`question-container ${hidden}`}>
+        <h1 id="questionTitle">
+          {questionState.title}
+          ;
+        </h1>
+        <div id="results" />
+        <span>
+          <img className="question-image" src="https://www.w3schools.com/images/w3schools_green.jpg" />
+        </span>
 
-      <button onClick={handleClick} id="1">
-        {questionState.optionOne}
-      </button>
-      <button onClick={handleClick} id="2">
-        {questionState.optionTwo}
-      </button>
-      <button onClick={handleClick} id="3">
-        {questionState.optionThree}
-      </button>
-      <button onClick={handleClick} id="4">
-        {questionState.optionFour}
-      </button>
-
+        <button onClick={handleClick} id="1">
+          {questionState.optionOne}
+        </button>
+        <button onClick={handleClick} id="2">
+          {questionState.optionTwo}
+        </button>
+        <button onClick={handleClick} id="3">
+          {questionState.optionThree}
+        </button>
+        <button onClick={handleClick} id="4">
+          {questionState.optionFour}
+        </button>
+      </div>
     </div>
+
   );
 };
 

@@ -57,3 +57,16 @@ img {
   margin-right: auto;
   padding: 100px;
 }
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s ease-in-out;
+}
+
+.active {
+  visibility: visible;
+  transition: visibility 1s 0s, opacity 1s ease-in-out;
+
+  // transition: visibility 0s 1s, opacity 1s ease-in-out;
+}

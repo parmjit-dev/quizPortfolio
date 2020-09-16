@@ -11,6 +11,7 @@ const questionRouter = require('./routes/questionRoutes');
 const quizRouter = require('./routes/quizRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
+const uploadRouter = require('./routes/uploadRoutes');
 const app = express(); //you don't need to manully define the content type in express
 
 app.use(express.static(path.join(__dirname, 'public'))); // any static images will be found in public
@@ -46,4 +47,6 @@ app.use('/', viewRouter)
 app.use('/api/v1/question', questionRouter); //creates a sub application
 app.use('/api/v1/quiz', quizRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/uploads', uploadRouter);
+
 module.exports = app; //need to export app

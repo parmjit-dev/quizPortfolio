@@ -6,6 +6,7 @@ import { store } from '../../store/store';
 
 const api = process.env.REACT_APP_API_QUESTION;
 const quizAPI = process.env.REACT_APP_API_QUIZ;
+const uploadAPI = process.env.REACT_APP_API_UPLOADS
 
 axios.interceptors.request.use(
   async (config) => {
@@ -66,6 +67,11 @@ const CreateQuestion = () => {
     await axios.post(quizAPI, newPost);
   };
 
+  // const handleImageUpload = async () => {
+  //   e.preventDefault();
+  //   await axios.post()
+  // }
+
   return (
     <div>
       <form className="question-form" onSubmit={handleSubmit}>
@@ -86,16 +92,6 @@ const CreateQuestion = () => {
         </div>
         <div className="form-input-material">
           <div className="form-input-material">
-            <label htmlFor="image">
-              {' '}
-              Image
-
-              <input
-                type="image"
-                id="image"
-                className="form-control-material"
-              />
-            </label>
           </div>
         </div>
         <div className="form-input-material">
@@ -140,17 +136,26 @@ const CreateQuestion = () => {
         <button type="submit" className="btn"> Submit Question </button>
       </form>
       <form className="quizForm" onSubmit={handleSuccessQuiz}>
-          <div>
-            <label> Question Title </label>
-            <input
-              type="text"
-              id="title"
-              className="form-control-material"
-              onChange={handleChange}
-            />
-            <button type="submit" className="btn"> Submit Quiz </button>
+        <div>
+          <label> Question Title </label>
+          <input
+            type="text"
+            id="title"
+            className="form-control-material"
+            onChange={handleChange}
+          />
+          <button type="submit" className="btn"> Submit Quiz </button>
+        </div>
+      </form>
+      <div>
+          <form action={uploadAPI} method="post" encType="multipart/form-data">
+              <input
+                type="file"
+                name="photo"
+              />
+              <button type="submit"> submit </button>
+            </form>
           </div>
-        </form>
     </div>
   );
 };

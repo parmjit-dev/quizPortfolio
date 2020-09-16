@@ -10,7 +10,7 @@ const Card = (props) => {
     <div className="quiz-collections" key={ID}>
       <Link
         className="image"
-        style={{ backgroundImage: 'url(https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg)' }}
+        style={{ backgroundImage: 'url(https://www.w3schools.com/images/w3schools_green.jpg)' }}
         // onClick={}
         to={`/playQuiz/?ID=${ID}`}
       />
