@@ -3,10 +3,12 @@
 #api
 quiz/node_modules/
 quiz/dist/
+node_modules/
 
 #keys
 *.env
 *.gitignore
+*.json
 # dependencies
-node_modules/
+
 
