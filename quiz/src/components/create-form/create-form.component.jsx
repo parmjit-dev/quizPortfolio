@@ -39,7 +39,9 @@ const CreateQuestion = () => {
   });
 
   const [file, setFile] = useState('');
-  const [imageState, setImageState] = useState('');
+  const [imageState, setImageState] = useState({
+    file: null,
+  });
 
   const handleSuccess = async (res) => {
     const { questions } = quizPost;
@@ -80,11 +82,12 @@ const CreateQuestion = () => {
     const image = e.target.files[0];
     console.log(image);
     setFile(image);
+    setImageState(URL.createObjectURL(image));
   }
 
   return (
-    <div>
-      <form className="question-form" onSubmit={handleSubmit}>
+    <div className="question-form">
+      <form className="questions-form" onSubmit={handleSubmit}>
         <div className="form-input-material">
           {/*  htmlFor is to tell react what thehtml entered is going to be for */}
           <label htmlFor="title">
@@ -99,7 +102,7 @@ const CreateQuestion = () => {
             {' '}
           </label>
         </div>
-        <image src={imageState}/>
+        <img src={imageState}/>
         <div className="form-input-material">
           <div className="form-input-material">
           </div>
@@ -145,7 +148,17 @@ const CreateQuestion = () => {
         </div>
         <button type="submit" className="btn"> Submit Question </button>
       </form>
-      <form className="quizForm" onSubmit={handleSuccessQuiz}>
+      <div>
+          <form onSubmit={handleImageUpload} method="post" encType="multipart/form-data">
+              <input
+                type="file"
+                name="photo"
+                onChange={handleFileChange}
+              />
+              <button type="submit"> submit </button>
+            </form>
+          </div>
+          <form className="quizForm" onSubmit={handleSuccessQuiz}>
         <div>
           <label> Quiz Title </label>
           <input
@@ -157,16 +170,6 @@ const CreateQuestion = () => {
           <button type="submit" className="btn"> Submit Quiz </button>
         </div>
       </form>
-      <div>
-          <form onSubmit={handleImageUpload} method="post" encType="multipart/form-data">
-              <input
-                type="file"
-                name="photo"
-                onChange={handleFileChange}
-              />
-              <button type="submit"> submit </button>
-            </form>
-          </div>
     </div>
   );
 };
