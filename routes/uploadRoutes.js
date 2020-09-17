@@ -61,6 +61,8 @@ function checkFileType(file, cb) {
   cb('Error: Images Only!');
 }
 
+// router.get('/:id', (req, res))
+
 router.post('/', (req, res) => {
   upload(req, res, (err) => {
   // req.file is the `avatar` file

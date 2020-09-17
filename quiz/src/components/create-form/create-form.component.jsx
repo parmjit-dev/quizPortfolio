@@ -38,8 +38,10 @@ const CreateQuestion = () => {
     user: globalUserState.state._id,
   });
 
+  const [file, setFile] = useState('');
+  const [imageState, setImageState] = useState('');
+
   const handleSuccess = async (res) => {
-    // console.log(userData.data);
     const { questions } = quizPost;
     questions.push(res.data.data.Question._id);
     await dispatch({ ...res.data.data, type: 'SET_QUESTION' });
@@ -67,10 +69,18 @@ const CreateQuestion = () => {
     await axios.post(quizAPI, newPost);
   };
 
-  // const handleImageUpload = async () => {
-  //   e.preventDefault();
-  //   await axios.post()
-  // }
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('photo', file);
+    await axios.post(uploadAPI, formData);
+  }
+
+  const handleFileChange = (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+    setFile(image);
+  }
 
   return (
     <div>
@@ -88,8 +98,8 @@ const CreateQuestion = () => {
             />
             {' '}
           </label>
-
         </div>
+        <image src={imageState}/>
         <div className="form-input-material">
           <div className="form-input-material">
           </div>
@@ -137,7 +147,7 @@ const CreateQuestion = () => {
       </form>
       <form className="quizForm" onSubmit={handleSuccessQuiz}>
         <div>
-          <label> Question Title </label>
+          <label> Quiz Title </label>
           <input
             type="text"
             id="title"
@@ -148,10 +158,11 @@ const CreateQuestion = () => {
         </div>
       </form>
       <div>
-          <form action={uploadAPI} method="post" encType="multipart/form-data">
+          <form onSubmit={handleImageUpload} method="post" encType="multipart/form-data">
               <input
                 type="file"
                 name="photo"
+                onChange={handleFileChange}
               />
               <button type="submit"> submit </button>
             </form>

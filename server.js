@@ -6,8 +6,8 @@ const app = require('./app');
 process.on('unhandleExecption', (err) => { // handles sync errors - like defineing errors
   console.log('unhandled execption! goodbye 👋');
   console.log(err);
-    process.exit(1);
-});
+  process.exit(1);
+}); 
 
 dotenv.config({ path: './config.env' });
 
@@ -20,7 +20,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((con) => {
-    //console.log(con.connections);
+    // console.log(con.connections);
     console.log('Connection Successful');
   });
 const port = process.env.PORT || 8000;
