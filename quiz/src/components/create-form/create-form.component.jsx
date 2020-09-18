@@ -3,6 +3,8 @@ import axios from 'axios';
 import './create-form.style.scss';
 import { questionStore } from '../../store/questionStore';
 import { store } from '../../store/store';
+// first monitor comment -- wow 
+//she told me put my heart in the bag and nobdy gets hurt
 
 const api = process.env.REACT_APP_API_QUESTION;
 const quizAPI = process.env.REACT_APP_API_QUIZ;
@@ -54,6 +56,13 @@ const CreateQuestion = () => {
     e.preventDefault();
     await axios.post(api, post)
       .then((res) => { handleSuccess(res); }).catch((err) => { console.log(err); });
+    setPost({    question: '',
+    answerSelectionOne: '',
+    answerSelectionTwo: '',
+    answerSelectionThree: '',
+    answerSelectionFour: '',
+    correctAnswer: parseInt('', 10),
+    image: '',})
   };
 
   const handleChange = (e) => {
@@ -75,7 +84,8 @@ const CreateQuestion = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('photo', file);
-    await axios.post(uploadAPI, formData);
+    const imagePath = await axios.post(uploadAPI, formData);
+    setPost({...post, image: imagePath.data.file});
   }
 
   const handleFileChange = (e) => {

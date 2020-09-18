@@ -20,7 +20,8 @@ const PlayQuiz = () => {
       const { doc } = Quiz.data.data;
       console.log(doc[0]);
       const quizDoc = doc[0];
-      setQuiz({ ...quiz, title: quizDoc.title, questions: quizDoc.questions });
+      console.log(quizDoc.questions);
+      setQuiz({ ...quiz, title: quizDoc.title, questions: quizDoc.questions});
     }
     getQuiz();
   }, []);

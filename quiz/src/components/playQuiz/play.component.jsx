@@ -16,12 +16,13 @@ const Play = (props) => {
     optionThree: '',
     optionFour: '',
     correctAnswer: '',
+    image: '',
   });
 
   const [hidden, setHidden] = useState('');
   const [active, setActive] = useState('hidden');
 
-  const { correctAnswer, currentQuestion } = questionState;
+  const { correctAnswer, image,currentQuestion } = questionState;
 
   useEffect(() => {
     function setElements() {
@@ -42,6 +43,7 @@ const Play = (props) => {
         optionThree: questions[questionState.currentQuestion].answerSelectionThree,
         optionFour: questions[questionState.currentQuestion].answerSelectionFour,
         correctAnswer: questions[questionState.currentQuestion].correctAnswer,
+        image: questions[questionState.currentQuestion].image,
       }));
     }
   };
@@ -66,6 +68,7 @@ const Play = (props) => {
       }
     }
   };
+  console.log(questionState)
 
   return (
     <div onClick={(e) => (console.log(e.target.className))}>
@@ -77,11 +80,8 @@ const Play = (props) => {
           {questionState.title}
           ;
         </h1>
+        <img className="question-image" src={process.env.PUBLIC_URL.image}/>
         <div id="results" />
-        <span>
-          <img className="question-image" src="https://www.w3schools.com/images/w3schools_green.jpg" />
-        </span>
-
         <button onClick={handleClick} id="1">
           {questionState.optionOne}
         </button>
