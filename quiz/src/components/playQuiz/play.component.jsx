@@ -22,6 +22,8 @@ const Play = (props) => {
   const [hidden, setHidden] = useState('');
   const [active, setActive] = useState('hidden');
 
+  const [imageState, setImageState] = useState('<img className="question-image"/>')
+
   const { correctAnswer, image,currentQuestion } = questionState;
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const Play = (props) => {
         correctAnswer: questions[questionState.currentQuestion].correctAnswer,
         image: questions[questionState.currentQuestion].image,
       }));
+      // setImageState(questionState.image);
     }
   };
 
@@ -68,7 +71,7 @@ const Play = (props) => {
       }
     }
   };
-  console.log(questionState)
+  console.log(`Image state: ${questionState.image}`)
 
   return (
     <div onClick={(e) => (console.log(e.target.className))}>
@@ -80,7 +83,9 @@ const Play = (props) => {
           {questionState.title}
           ;
         </h1>
-        <img className="question-image" src={process.env.PUBLIC_URL.image}/>
+        <div className="image-container">
+        <img className="question-image" src={(`/${questionState.image}`)} onClick={(e) => (console.log(e.target))}/>
+        </div>
         <div id="results" />
         <button onClick={handleClick} id="1">
           {questionState.optionOne}
@@ -88,12 +93,18 @@ const Play = (props) => {
         <button onClick={handleClick} id="2">
           {questionState.optionTwo}
         </button>
+        
+        { typeof questionState.optionThree !== 'undefined' ? (
         <button onClick={handleClick} id="3">
           {questionState.optionThree}
-        </button>
+        </button> ) : <div/>
+        }
+
+        { typeof questionState.optionFour !== 'undefined' ? (
         <button onClick={handleClick} id="4">
           {questionState.optionFour}
-        </button>
+        </button> ):  <div/>
+        }
       </div>
     </div>
 

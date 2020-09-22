@@ -3,6 +3,9 @@ button {
   border-radius: 0;
   display: inline-block;
   width: 350px;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
   // vertical-align: bottom;
   // overflow: hidden;
   &:hover {
@@ -44,8 +47,11 @@ button {
   }
 
   .btn {
-    width: 50%;
-    margin: 18px 0 9px 0;
+    // width: 50%;
+    // margin: 18px 0 9px 0;
+    // max-width: 100%;
+    // height: auto;
+    // width: auto\9;
   }
 }
 
@@ -69,4 +75,25 @@ img {
   transition: visibility 1s 0s, opacity 1s ease-in-out;
 
   // transition: visibility 0s 1s, opacity 1s ease-in-out;
+}
+
+.image-container {
+  // width: 100%;
+  // position: relative;
+  // background-size: cover;
+  // text-align: center;
+  // display: block;
+  display: flex;
+  justify-content: center;
+
+  .question-image {
+    // background-size: cover;
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+
+    // position: relative;
+    // object-fit: fill;
+  }
+
 }
