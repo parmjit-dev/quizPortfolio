@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -45,8 +46,13 @@ module.exports = {
     new HtmlWebpackPlugin(),
     // new MiniCssExtractPlugin({ filename: isDevelopment ? '[name].css' : '[name].[hash].css', chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css' }),
   ],
-  // devServer: {
-  //   contentBase: './dist',
-  //   hot: true
-  // }
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+    watchOptions: {
+      ignored: [
+        path.resolve(__dirname, 'public'),
+      ]
+    }
+  }
 };

@@ -24,15 +24,13 @@ const SignIn = (props) => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
   const history = useHistory();
-  // console.log(globalState);
-  const [profileState, setProfileState] = useState(props);
-  const storedJwt = localStorage.getItem('token');
+  // const storedJwt = localStorage.getItem('token');
   // set the web token to state -- if no token then set to null
   const [post, setPost] = useState({
     email: '',
     password: '',
   });
-  const [jwt, setJwt] = useState(storedJwt || null);
+  // const [jwt, setJwt] = useState(storedJwt || null);
 
   const handleSuccess = async (userData) => {
     userData.data.user.loggedIn = true;
@@ -48,7 +46,7 @@ const SignIn = (props) => {
     try {
       await axios.post(api, post).then((res) => {
         localStorage.setItem('token', res.data.token);
-        setJwt(res.data.token);
+        // setJwt(res.data.token);
         // console.log(res);
         handleSuccess(res.data);
       }).catch((err) => console.log(err));

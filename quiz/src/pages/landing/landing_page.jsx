@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { store } from '../../store/store';
 // import { FindUserQuiz } from '../../store/findQuiz';
 import './landing_page.style.scss';
 
 
 const Landing = () => {
-  const globalUserStore = useContext(store);
 
   // const userQuiz = FindUserQuiz(api, state._id);
   // console.log(userQuiz);

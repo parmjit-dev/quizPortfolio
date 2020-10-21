@@ -2,16 +2,20 @@
 import React, { createContext, useReducer } from 'react';
 
 let initialState = [];
-const questionStore = createContext(initialState);
-const { Provider } = questionStore;
+const quizStore = createContext(initialState);
+const { Provider } = quizStore;
 
-const QuestionStateProvider = ({ children }) => {
+const QuizStateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state = initialState, action) => {
     switch (action.type) {
       case 'GET_QUIZZES':
-        const {_id} = action.Question;
+        const {_id} = action;
         initialState.push(_id);
         return initialState;
+      // case 'NEW_QUIZ':
+      //   const {_id} = action;
+      //   initialState.push(_id);
+      //   return initialState; 
       default:
         throw new Error();
     }
@@ -20,4 +24,4 @@ const QuestionStateProvider = ({ children }) => {
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
-export { questionStore, QuestionStateProvider };
+export { quizStore, QuizStateProvider };

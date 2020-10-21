@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import * as qs from 'query-string';
+import React from 'react';
 // import { useLocation } from 'react-router';
 // import axios from 'axios';
 import PlayQuiz from '../../components/playQuiz/playQuiz.component';

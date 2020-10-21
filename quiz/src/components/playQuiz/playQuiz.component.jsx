@@ -1,6 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import * as qs from 'query-string';
-import { useLocation } from 'react-router';
+import React, {useState, useEffect } from 'react';
 import axios from 'axios';
 import Play from './play.component';
 // import './playQuiz.style.scss';
@@ -24,6 +22,7 @@ const PlayQuiz = () => {
       setQuiz({ ...quiz, title: quizDoc.title, questions: quizDoc.questions});
     }
     getQuiz();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

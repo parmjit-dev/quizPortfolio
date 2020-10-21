@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import './play.style.scss';
-import { scoreStore } from '../../store/scoreStore';
+// import { scoreStore } from '../../store/scoreStore';
 
 const Play = (props) => {
-  const score = useContext(scoreStore);
-  const { dispatch } = score;
+  // const score = useContext(scoreStore);
+  // const { dispatch } = score;
 
   const { questions } = props.props;
   const [questionState, setQuestionState] = useState({
@@ -22,15 +22,16 @@ const Play = (props) => {
   const [hidden, setHidden] = useState('');
   const [active, setActive] = useState('hidden');
 
-  const [imageState, setImageState] = useState('<img className="question-image"/>')
+  // const [imageState, setImageState] = useState('<img className="question-image"/>')
 
-  const { correctAnswer, image,currentQuestion } = questionState;
+  const { correctAnswer} = questionState;
 
   useEffect(() => {
     function setElements() {
       handleChange();
     }
     setElements();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions]);
 
   const handleChange = () => {
@@ -53,7 +54,7 @@ const Play = (props) => {
 
   const handleClick = (e) => {
     const { id } = e.target;
-    if (id == correctAnswer) {
+    if (id === correctAnswer) {
       setQuestionState({ ...questionState, currentQuestion: (questionState.currentQuestion++), currentScore: questionState.currentScore++ });
       if ((questions.length > questionState.currentQuestion) === true) {
         handleChange();
@@ -84,7 +85,7 @@ const Play = (props) => {
           ;
         </h1>
         <div className="image-container">
-        <img className="question-image" src={(`/${questionState.image}`)} onClick={(e) => (console.log(e.target))}/>
+        <img className="question-image" alt="questionImage" src={(`/${questionState.image}`)} onClick={(e) => (console.log(e.target))}/>
         </div>
         <div id="results" />
         <button onClick={handleClick} id="1">
@@ -93,14 +94,14 @@ const Play = (props) => {
         <button onClick={handleClick} id="2">
           {questionState.optionTwo}
         </button>
-        
-        { typeof questionState.optionThree !== 'undefined' ? (
+
+        { questionState.optionThree ? (
         <button onClick={handleClick} id="3">
           {questionState.optionThree}
         </button> ) : <div/>
         }
 
-        { typeof questionState.optionFour !== 'undefined' ? (
+        { questionState.optionFour ? (
         <button onClick={handleClick} id="4">
           {questionState.optionFour}
         </button> ):  <div/>

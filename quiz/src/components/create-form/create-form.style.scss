@@ -1,16 +1,4 @@
-.btn {
-  padding: 8px 20px;
-  border-radius: 0;
-  // overflow: hidden;
-  &:hover {
-    // background: transparent;
-    box-shadow: 0 0 20px 10px hsla(204, 70%, 53%, 0.5);
 
-    &::before {
-      transform: translateX(100%);
-    }
-  }
-}
 
 .form-input-material {
   --input-default-border-color: white;

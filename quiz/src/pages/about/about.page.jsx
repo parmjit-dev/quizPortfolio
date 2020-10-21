@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { store } from '../../store/store';
 // import './dashboard.style.scss';
 
@@ -9,7 +9,7 @@ const About = (props) => {
     <div className="dashboard">
     <h1> About Quiz Maker </h1>
       <p>
-        Welcome to Quiz Maker ✌
+        Welcome to Quiz Maker <span role="img" aria-label="emoji">✌</span>
         This is For Parmjit Singh's Portfolio
       </p>
       <h2>

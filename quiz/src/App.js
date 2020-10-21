@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {
@@ -8,16 +8,14 @@ import SignInAndUp from './pages/sign/sign.component';
 import Header from './components/header/header.component';
 import QuizPage from './pages/createQuiz/createQuiz.page';
 import DashBoard from './pages/dashboard/dashboard.component';
+import CreateQuestion from './components/create-form/create-form.component';
 import Landing from './pages/landing/landing_page';
 import About from './pages/about/about.page';
 import PlayQuizPage from './pages/playQuiz/playQuiz.page';
 import { store } from './store/store';
-import { questionStore } from './store/questionStore';
-
 const App = () => {
   const globalState = useContext(store);
-  const globalQuestionState = useContext(questionStore);
-  console.log(globalQuestionState);
+  // const globalQuestionState = useContext(questionStore);
   // const handleLogin = (data) => {
   //   setUserAuth({
   //     login: true,
@@ -56,6 +54,8 @@ const App = () => {
             return <QuizPage />;
           }}
         />
+        <Route path="/createQuizzes" component={CreateQuestion} />
+
         <Route path="/playQuiz/" component={PlayQuizPage} />
 
       </Switch>
