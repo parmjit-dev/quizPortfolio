@@ -11,7 +11,7 @@ const Card = (props) => {
         className="image"
         style={{ backgroundImage: 'url(https://www.w3schools.com/images/w3schools_green.jpg)' }}
         // onClick={}
-        to={`/playQuiz/?ID=${ID}`}
+        to={`/updateQuiz/?ID=${ID}`}
       />
       <div className="collection-footer">
         <span className="name">{titles}</span>

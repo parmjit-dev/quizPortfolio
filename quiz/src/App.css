@@ -1,4 +1,18 @@
 body {
-  background: rgb(127,127,213);
-  background: linear-gradient(90deg, rgba(127,127,213,1) 15%, rgba(134,168,231,1) 55%, rgba(145,234,228,1) 100%);
+  background: #8e9eab;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8e9eab, #eef2f3);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8e9eab, #eef2f3);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  a {
+    text-decoration: none;
+    color: white
+}
+
+button {
+  color: white;
+  text-decoration: none;
 }

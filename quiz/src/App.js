@@ -11,7 +11,7 @@ import DashBoard from './pages/dashboard/dashboard.component';
 import CreateQuestion from './components/create-form/create-form.component';
 import Landing from './pages/landing/landing_page';
 import About from './pages/about/about.page';
-import PlayQuizPage from './pages/playQuiz/playQuiz.page';
+import UpdateQuiz from './pages/updateQuiz/updateQuiz.page';
 import { store } from './store/store';
 const App = () => {
   const globalState = useContext(store);
@@ -33,7 +33,11 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => (<Landing />)} />
+        <Route exact path="/" render={() => {if (!globalState.state.loggedIn) {
+              return <Landing />
+            }
+            return <DashBoard />;
+        }}/>
         <Route
           path="/signin"
           render={() => {
@@ -56,7 +60,7 @@ const App = () => {
         />
         <Route path="/createQuizzes" component={CreateQuestion} />
 
-        <Route path="/playQuiz/" component={PlayQuizPage} />
+        <Route path="/updateQuiz/" component={UpdateQuiz} />
 
       </Switch>
     </BrowserRouter>
