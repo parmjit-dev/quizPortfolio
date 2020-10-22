@@ -15,4 +15,10 @@ body {
 button {
   color: white;
   text-decoration: none;
+  overflow: hidden;
+  margin: 20px;
+  }
+
+  * {
+    line-height: 2;
 }
