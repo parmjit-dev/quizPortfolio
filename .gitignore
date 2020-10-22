@@ -1,8 +1,7 @@
 *.env
 *.gitignore
-*.json
+.json
 /quiz/node_modules/
 /quiz/dist/
 /node_modules/
 /public/
-/quiz/public/

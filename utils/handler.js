@@ -5,7 +5,8 @@ const catchAsync = require('./catchAsync');
 const APIFeatures = require('./apiFeatures');
 
 exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
-  const doc = await Model.findByIdAndDelete(req.params.id); // another mongoose function -- takes url params
+  const doc = await Model.findByIdAndDelete(req.params.id); 
+  // anther mongoose function -- takes url params
 
   if (!doc) {
     return next(new AppError('No document found with that ID', 404));
@@ -15,13 +16,14 @@ exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
 });
 
 exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
-  const doc = await Model.findByIdAndUpdate(req.params.id, req.body, { // another mongoose function -- finds the id in the request url params and takes the body data to update at id
+  const doc = await Model.findByIdAndUpdate(req.params._id, req.body, {
+    // another mongoose function -- finds the id in the request url params and takes the body data to update at id
     new: true,
     runValidators: true,
   });
 
   if (!doc) {
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No question found with that ID', 404));
   }
 
   res.status(200).json({ status: 'success', data: { doc } }); // successful creation
@@ -59,7 +61,7 @@ exports.getOne = (Model, population) => catchAsync(async (req, res, next) => {
 
 exports.getAll = (Model, population) => catchAsync(async (req, res, next) => {
   let filter = {}; // only for populating reviews with tours
-  if (req.params.tourId) filter = { tour: req.params.tourId };
+  if (req.params.quizID) filter = { quizID: req.params.quizID[0].id };
 
   let modeledQuery = new APIFeatures(Model.find(filter), req.query).filter().sort().limit()
     .pagination();
@@ -69,7 +71,7 @@ exports.getAll = (Model, population) => catchAsync(async (req, res, next) => {
   const doc = await modeledQuery;
 
   if (!doc) {
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No questions found with that ID', 404));
   }
     // you pass the finder or query you want to use -- same as the mongo db basically.
     // execute the query -- after modelling the query you then consume it.

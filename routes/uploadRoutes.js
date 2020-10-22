@@ -2,7 +2,8 @@ const express = require('express');
 const multer = require('multer');
 // var upload = multer({ dest: 'uploads/' })
 const path = require('path');
-const Question = require('../models/questionModel');
+// const Question = require('../models/questionModel');
+
 const router = express.Router();
 
 // const config = { storage: multer.diskStorage({
@@ -31,7 +32,7 @@ const router = express.Router();
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
-  destination: '../quiz/public/uploads',
+  destination: './quiz/public/uploads/',
   filename(req, file, cb) {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
   },
@@ -86,6 +87,7 @@ router.post('/', (req, res) => {
     } else if (!req.file) {
       console.log('no file');
     } else {
+      console.log(req.file.filename);
       res.status(200).json({
         status: 'success',
         message: 'file uploaded',

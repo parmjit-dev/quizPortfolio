@@ -43,7 +43,7 @@ app.use((req, res, next) => { //creates a time for the console
 });
 app.use(cors());
 
-app.use('/', viewRouter)
+app.use('/', viewRouter);
 app.use('/api/v1/question', questionRouter); //creates a sub application
 app.use('/api/v1/quiz', quizRouter);
 app.use('/api/v1/users', userRouter);

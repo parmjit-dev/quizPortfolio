@@ -1,5 +1,10 @@
 // controllers
 const Question = require('../models/questionModel');
+const handler = require('../utils/handler');
+
+exports.getAllQuestions = handler.getAll(Question, 'quizID');
+exports.updateQuestion = handler.updateOne(Question);
+exports.deleteQuestion = handler.deleteOne(Question);
 
 exports.getQuestion = async (req, res) => {
   if (!req.name || !req.price) {
@@ -28,32 +33,6 @@ exports.createQuestion = async (req, res) => {
     res.status(400).json({
       status: 'fail',
       message: `Bad Request ${req.body.correctAnswer}`,
-    });
-  }
-};
-
-exports.updateQuestion = async (req, res) => {
-  try {
-    const quiz = await Question.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.status(200).json({ status: 'success', data: { quiz } });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: `${err}`,
-    });
-  }
-};
-
-exports.deleteQuestion = async (req, res) => {
-  try {
-    await Question.findByIdAndDelete(req.params.id);
-    res.status(204).json({ status: 'success', data: null });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: `${err}`,
     });
   }
 };
