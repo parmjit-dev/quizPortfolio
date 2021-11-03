@@ -36,7 +36,7 @@
     "nodemon": "^2.0.4",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "validator": "^13.1.1",
+    "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
